@@ -6,8 +6,12 @@ defmodule SomaLista do
   todos os elementos de uma lista.
   """
   @spec run(list(integer)) :: integer
-  def run(xs) do
-    # FIXME
+  def run([h | t]) do
+   cond do
+    length([h | t])>1 ->  run(t) + h
+    length([h | t]) == 1 -> h
+    [h | t] == [] -> 0
+  end
   end
 end
 

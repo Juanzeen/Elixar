@@ -14,10 +14,24 @@ defmodule Fibonnacci do
   de um número da sequência somado ao seu antecessor.
   """
   @spec run(integer) :: list(integer)
-  def run(n) do
-    # FIXME
+  #Sempre que for um número válido direciona para a função do_fibonacci
+  #Na função do_fibonacci os elemento são adicionados no começo da lista, então no final usamos o reverse para que fique organizado corretamente.
+  def run(number) when number > 0 do
+    do_fibonacci(number, [1, 1])
+    |> Enum.reverse()
+  end
+#A função recebe [1,1] no acumulador por padrão, então quando o usuário pede a segunda posição ou algo menor retornamos o acumulador [1,1]
+#Já que são valores padrão da sequência
+  def do_fibonacci(n, acc) when n <= 2, do: acc
+#Para casos onde o elemento desejado está a frente do 2 pegamos os dois últimos elementos da lista (Na verdade os primeiros, mas a sequência está
+#sendo feita por meio de prepending, então acabam sendo os últimos). Somamos eles e adicionamos no começo da lista.
+#Esse processo é repetido até que n = 2, pois quando essa condição for satisfeita o acc será retornado. Nesse caso o n funciona como se fosse
+#Um iterador
+  def do_fibonacci(n, [second_last, last | _]=acc) do
+    do_fibonacci(n - 1, [last + second_last | acc])
   end
 end
+
 
 defmodule FibonnacciTest do
   use ExUnit.Case, async: true

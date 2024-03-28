@@ -10,16 +10,28 @@ defmodule ChamadaCauda do
   Lembre que "Otimização de Chamada de Cauda" é um método
   aplicado em funções recursivas onde a última instrução
   da funcão é a chamada recursiva, ou seja, a função retorna
-  uma chada para a recursão.
+  uma chamada para a recursão.
   """
-  def run() do
-    # FIXME
+  def run(list) do
+    run_aux(list)
   end
+
+  def run_aux([h | t], acc \\0) do
+      run_aux(t, h + acc)
+   end
+
+  def run_aux([], acc) do
+    acc
+  end
+
 end
 
-defmodule ChamadaCaudaTest do
+defmodule SomaListaTest do
   use ExUnit.Case, async: true
 
-  test "FIXME" do
+  test "deve retornar o somatório de todos os elementos da lista" do
+    assert ChamadaCauda.run([1, 2, 3]) == 6
+    assert ChamadaCauda.run([3, 2, 1]) == 6
+    assert ChamadaCauda.run([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == 55
   end
 end

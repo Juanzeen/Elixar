@@ -18,11 +18,17 @@ defmodule BuscaBinaria do
     Se for menor, repita a busca na metade inferior. Se for maior, na metade superior.
   """
   @spec run(list(integer), integer) :: boolean
-  def run(xs, x) do
-    # FIXME
-    :error
+  def run([],_), do: false
+  def run([head | _], x) when head == x, do: true
+  def run([head | tail], x) do
+      left = Enum.filter(tail, &(&1 < head))
+      right = Enum.filter(tail, &(&1 >= head))
+      run(left, x)
+      run(right, x)
   end
 end
+
+
 
 defmodule BuscaBinariaTest do
   use ExUnit.Case, async: true

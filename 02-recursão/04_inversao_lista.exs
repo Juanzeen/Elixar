@@ -6,10 +6,15 @@ defmodule InversaoLista do
   dos elementos em uma lista usando recursão.
   """
   @spec run(list(integer)) :: list(integer)
-  def run(xs) do
-    # FIXME
+  def run([head|tail], list \\ []) do
+    run(tail, [head | list])
+    end
+
+  def run([], list) do
+    list
   end
 end
+
 
 defmodule InversaoListaTest do
   use ExUnit.Case, async: true

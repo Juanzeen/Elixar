@@ -17,9 +17,20 @@ defmodule Subconjuntos do
       [[]]
   """
   @spec run(list(any)) :: list(list(any))
-  def run(lista) do
-    # FIXME
+
+  def run([], acc), do: [[]]
+  def run(list, acc\\[[]]) do
+    add_unit(list, [list | acc])
   end
+
+
+  defp  add_unit([], unitary), do: unitary
+
+  defp add_unit(set, unitary\\[]) do
+  [hd | tl] = set
+  add_unit(tl, [[hd] | unitary])
+end
+
 end
 
 defmodule SubconjuntosTest do

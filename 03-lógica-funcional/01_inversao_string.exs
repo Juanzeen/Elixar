@@ -17,8 +17,17 @@ defmodule InversaoString do
       ""
   """
   @spec run(String.t()) :: String.t()
-  def run(s) do
-    # FIXME
+  def run("", acc), do: acc
+  def run(s, acc\\"") do
+    #converte a string em uma charlist
+      [h | t] = to_charlist(s)
+    #charlists podem receber o método to_string, mas ele não pode ser aplicado a chars individuais
+      to_string(t)
+    #então, para converter o inteiro que representa o head em um char usamos a notação <<h::utf8>>
+    #essa é a notação de bitstrings, que trata-se de uma sequência contígua de bits na memória
+    #basicamente temos o seguinte <<int_value::size_of_the_value_in_bits>>, assim nós passamos o "tamanho" UTF8 e convertemos para um char
+      |>run(<<h::utf8>> <> acc)
+
   end
 end
 

@@ -17,9 +17,9 @@ defmodule ListaOrdenada do
       false
   """
   @spec run(list(integer)) :: boolean
-  def run(nums) do
-    # FIXME
-  end
+  def run([n]), do: true
+  def run([a,b | tl]) when a<=b, do: run([b|tl])
+  def run([a,b | tl]) when a>b, do: false
 end
 
 defmodule ListaOrdenadaTest do

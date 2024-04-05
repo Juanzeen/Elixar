@@ -16,9 +16,9 @@ defmodule ContagemMaioresQue do
       0
   """
   @spec run(list(integer), integer) :: integer
-  def run(nums, n) do
-    # FIXME
-  end
+  def run([], n, acc), do: acc
+  def run([h|t], n, acc) when(h<=n), do: run(t, n, acc)
+  def run([h | t], n, acc\\0) when (h>n), do: run(t, n, acc + 1)
 end
 
 defmodule ContagemMaioresQueTest do

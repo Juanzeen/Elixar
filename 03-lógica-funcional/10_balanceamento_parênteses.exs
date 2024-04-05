@@ -21,10 +21,25 @@ defmodule VerificacaoParenteses do
       iex> VerificacaoParenteses.run("(()")
       false
   """
-  @spec run(String.t()) :: boolean
-  def run(s) do
-    # FIXME
+  @spec run(String.t(), bitstring, integer, integer) :: boolean
+
+
+
+  def run(s, last, left, right, 2), do: false
+  def run("", last, left, right, switched) when left == right, do: true
+  def run("", last, left, right, switched) when left != right, do: false
+
+  def run(s, last\\40, left\\0, right\\0, switched\\0) do
+    [h | t] = to_charlist(s)
+    cond do
+      h == 40 and h == last -> run(to_string(t), h, left + 1, right, 0)
+      h == 40 and h != last -> run(to_string(t), h, left + 1, right, switched + 1)
+      h == 41 and h == last -> run(to_string(t), h, left, right + 1, 0)
+      h == 41 and h != last -> run(to_string(t), h, left, right + 1, switched + 1)
+      true -> :error
+    end
   end
+
 end
 
 defmodule VerificacaoParentesesTest do

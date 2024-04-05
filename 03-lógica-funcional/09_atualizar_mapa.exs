@@ -1,4 +1,4 @@
-EXUnit.start()
+ExUnit.start()
 
 defmodule AtualizarMapaAninhado do
   @doc """
@@ -19,7 +19,8 @@ defmodule AtualizarMapaAninhado do
   """
   @spec run(map(), list(atom()), any()) :: map()
   def run(mapa, caminho, valor) do
-    # FIXME
+    Map.new(caminho, mapa)
+    |> IO.inspect()
   end
 end
 

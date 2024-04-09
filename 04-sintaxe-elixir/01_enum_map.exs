@@ -14,7 +14,7 @@ defmodule EnumMap do
   """
   @spec run(list(integer)) :: list(integer)
   def run(nums) do
-    # FIXME
+    Enum.map(nums, fn x -> x*2 end)
   end
 end
 

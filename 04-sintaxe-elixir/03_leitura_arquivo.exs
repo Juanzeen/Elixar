@@ -15,7 +15,8 @@ defmodule LeituraArquivoMaiusculas do
   """
   @spec run(String.t()) :: String.t() | :error
   def run(path) do
-    # FIXME
+    File.read!("file.txt")
+    |>String.upcase()
   end
 end
 

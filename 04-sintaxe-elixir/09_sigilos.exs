@@ -14,7 +14,8 @@ defmodule UsoSigilos do
   """
   @spec run(String.t()) :: list(String.t())
   def run(texto) do
-    Regex.run(~r/\d\d\d/, texto)
+    Regex.scan(~r/[0-9]{3}/, texto)
+    |> List.flatten()
   end
 end
 

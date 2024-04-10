@@ -14,7 +14,7 @@ defmodule UsoSigilos do
   """
   @spec run(String.t()) :: list(String.t())
   def run(texto) do
-    # FIXME
+    Regex.run(~r/\d\d\d/, texto)
   end
 end
 

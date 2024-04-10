@@ -1,5 +1,9 @@
 ExUnit.start()
 
+defmodule Ponto do
+  defstruct x: 0, y: 0
+end
+
 defmodule CriacaoStruct do
   @doc """
   Cria uma struct para representar um ponto no espaço 2D e uma função para mover o ponto.
@@ -17,11 +21,11 @@ defmodule CriacaoStruct do
   @spec criar(integer, integer) :: map
   @spec mover(map, integer, integer) :: map
   def criar(x, y) do
-    # FIXME
+    %Ponto{x: x, y: y}
   end
 
   def mover(ponto, dx, dy) do
-    # FIXME
+    %{ponto | x: ponto.x + dx, y: ponto.y + dy }
   end
 end
 
@@ -30,6 +34,6 @@ defmodule CriacaoStructTest do
 
   test "move o ponto corretamente" do
     ponto = CriacaoStruct.criar(2, 3)
-    assert CriacaoStruct.mover(ponto, 5, 7) == %{x: 7, y: 10}
+    assert CriacaoStruct.mover(ponto, 5, 7) == %Ponto{x: 7, y: 10}
   end
 end

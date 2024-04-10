@@ -12,9 +12,11 @@ defmodule UsoModuleAttributes do
       iex> UsoModuleAttributes.run()
       "O valor da constante é: 42"
   """
+  @my_const 42
+  @my_second_const %{succes: "Good!"}
   @spec run() :: String.t()
   def run() do
-    # FIXME
+    IO.inspect("O valor da constante é: #{@my_const}")
   end
 end
 

@@ -36,9 +36,26 @@ defmodule CPF do
   """
   @spec run(String.t()) :: boolean
   def run(cpf) when is_binary(cpf) do
-    # FIXME
-    :error
+    if Regex.match?(~r/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/, cpf) do
+       Regex.replace(~r/[.-]/, cpf, "")
+       |> String.split("",trim: true)
+       |> Enum.map(fn x -> String.to_integer(x)end)
+       |> check_equal
+       |>IO.inspect
+    else
+      false
   end
+end
+
+
+def check_equal(list) do
+   if Enum.all?(list, fn x -> x == hd list end) do
+    false
+   else
+    list
+   end
+end
+
 end
 
 defmodule CPFTest do

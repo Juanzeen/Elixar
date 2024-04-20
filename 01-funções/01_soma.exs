@@ -12,9 +12,8 @@ defmodule Soma do
   - [`Kernel.+/2`](https://hexdocs.pm/elixir/Kernel.html#+/2)
   """
   @spec run(integer, integer) :: integer | :error
-  def run(a, b) do
-    # FIXME
-  end
+  def run(a, b) when is_integer(a) != true or is_integer(b) != true, do: :error
+  def run(a, b), do: a + b
 end
 
 defmodule SomaTest do

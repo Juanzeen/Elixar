@@ -18,8 +18,14 @@ defmodule Idade do
   - [`cond/1`](https://hexdocs.pm/elixir/case-cond-and-if.html#cond)
   """
   @spec run(integer) :: :infantil | :adolescente | :adulto | :idoso | :error
-  def run(idade) do
-    # FIXME
+  def run(idade) when is_integer(idade) != true, do: :error
+  def run(idade) when is_integer(idade) do
+    cond do
+    idade>= 0 and idade<=12 -> :infantil
+    idade> 12 and idade <=24 -> :adolescente
+    idade> 24 and idade <60 -> :adulto
+    idade>= 60 -> :idoso
+    end
   end
 end
 

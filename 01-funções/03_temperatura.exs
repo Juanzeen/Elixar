@@ -18,9 +18,9 @@ defmodule Temperatura do
   - [`Kernel.*/2`](https://hexdocs.pm/elixir/Kernel.html#*/2)
   """
   @spec run(integer, :fahrenheit | :kelvin) :: float | :error
-  def run(celsius, medida) do
-    # FIXME
-  end
+  def run(celsius, _medida) when is_integer(celsius) != true, do: :error
+  def run(celsius, medida) when is_integer(celsius) == true and medida == :fahrenheit, do: (9*celsius)/5 + 32
+  def run(celsius, medida) when is_integer(celsius) == true and medida == :kelvin, do: celsius + 273.15
 end
 
 defmodule TemperaturaTest do

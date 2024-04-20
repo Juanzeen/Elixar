@@ -17,7 +17,9 @@ defmodule Contagem do
   """
   @spec run(String.t(), String.t()) :: integer
   def run(frase, palavra) do
-    # FIXME
+    Regex.scan(~r/#{palavra}/, frase)
+    |> List.flatten()
+    |> length()
   end
 end
 

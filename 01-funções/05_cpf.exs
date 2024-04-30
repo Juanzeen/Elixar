@@ -39,14 +39,37 @@ defmodule CPF do
     if Regex.match?(~r/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/, cpf) do
        Regex.replace(~r/[.-]/, cpf, "")
        |> String.split("",trim: true)
-       |> Enum.map(fn x -> String.to_integer(x)end)
-       |> check_equal
-       |>IO.inspect
+       |> Enum.map(fn x -> String.to_integer(x) end)
+       |> check_lasts
+       |> IO.inspect
     else
       false
   end
 end
 
+def check_lasts(intcpf) do
+    [l1, l2, l3 | null] =  Enum.chunk_every(intcpf, 9)
+    check_firstlast(l1,l2)
+end
+
+
+defp check_firstlast(numbers, lasts) do
+     summed = sum_mult(numbers)
+
+     if rem(summed, 11) < 2 do
+        0
+     else
+      rem(summed,11) - 11
+      |> abs
+     end
+end
+
+defp sum_mult([], mult, acc), do: acc
+
+defp sum_mult([h | t], mult\\10, acc\\0) do
+  IO.inspect(acc)
+    sum_mult(t, mult - 1, acc + h*mult)
+end
 
 def check_equal(list) do
    if Enum.all?(list, fn x -> x == hd list end) do
